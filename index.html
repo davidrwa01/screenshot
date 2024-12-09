@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Screenshot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Submit Screenshot</h1>
+        <form id="uploadForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="screenshot">Upload Screenshot</label>
+                <input type="file" id="screenshot" name="screenshot" accept="image/*" required>
+            </div>
+            <button type="button" onclick="redirectToWhatsApp()">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function redirectToWhatsApp() {
+            const username = document.getElementById('username').value;
+            const screenshotInput = document.getElementById('screenshot');
+
+            if (!username || !screenshotInput.files.length) {
+                alert("Please fill out the form completely.");
+                return;
+            }
+
+            const phoneNumber = "0799387258";
+            const message = `Hello, my username is ${username}. I have uploaded the screenshot as requested.`;
+            const encodedMessage = encodeURIComponent(message);
+
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            alert("You will be redirected to WhatsApp. Please attach the screenshot manually.");
+            window.open(whatsappURL, "_blank");
+        }
+    </script>
+</body>
+</html>
